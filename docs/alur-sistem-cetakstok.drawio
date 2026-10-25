@@ -1,0 +1,1326 @@
+<mxfile host="app.diagrams.net" modified="2026-10-21T02:00:00.000Z" agent="Antigravity" version="24.0.0" type="device">
+  <diagram id="diag_overview" name="1. Alur Sistem Utama (Overview)">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1640" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+<mxCell id="header_title" value="&lt;b style=&quot;font-size:15px;letter-spacing:0.5px;&quot;&gt;ALUR SISTEM UTAMA CETAKSTOK (CROSS-FUNCTIONAL WORKFLOW)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:11px;color:#E5E7EB;&quot;&gt;Sistem Inventaris Bahan Percetakan Gudang Pusat &amp; 5 Cabang | Arsitektur Laravel 12 &amp; StokService&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;fontFamily=IBM Plex Sans, Arial, sans-serif;fontColor=#FFFFFF;align=center;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="40" y="20" width="1560" height="50" as="geometry" />
+</mxCell>
+<mxCell id="lane_cabang" value="&lt;b&gt;ADMIN CABANG (5 CABANG)&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=36;rounded=0;fillColor=#000000;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontStyle=1;fontColor=#FFFFFF;swimlaneFillColor=#FFFFFF;collapsible=0;swimlaneLine=1;" vertex="1" parent="1">
+  <mxGeometry x="40" y="90" width="390" height="1450" as="geometry" />
+</mxCell>
+<mxCell id="lane_pusat" value="&lt;b&gt;ADMIN GUDANG PUSAT&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=36;rounded=0;fillColor=#000000;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontStyle=1;fontColor=#FFFFFF;swimlaneFillColor=#FFFFFF;collapsible=0;swimlaneLine=1;" vertex="1" parent="1">
+  <mxGeometry x="430" y="90" width="390" height="1450" as="geometry" />
+</mxCell>
+<mxCell id="lane_sistem" value="&lt;b&gt;SISTEM CETAKSTOK (SERVICE &amp; ENGINE)&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=36;rounded=0;fillColor=#000000;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontStyle=1;fontColor=#FFFFFF;swimlaneFillColor=#FFFFFF;collapsible=0;swimlaneLine=1;" vertex="1" parent="1">
+  <mxGeometry x="820" y="90" width="390" height="1450" as="geometry" />
+</mxCell>
+<mxCell id="lane_owner" value="&lt;b&gt;OWNER &amp; MANAJEMEN&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=36;rounded=0;fillColor=#000000;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontStyle=1;fontColor=#FFFFFF;swimlaneFillColor=#FFFFFF;collapsible=0;swimlaneLine=1;" vertex="1" parent="1">
+  <mxGeometry x="1210" y="90" width="390" height="1450" as="geometry" />
+</mxCell>
+<mxCell id="n_start_bm" value="Mulai: Supplier Kirim Bahan&lt;br/&gt;&lt;i&gt;(Sesuai Purchase Order)&lt;/i&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#FFFFFF;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="530" y="150" width="200" height="50" as="geometry" />
+</mxCell>
+<mxCell id="n_pusat_terima_bm" value="Cek Fisik &amp; Input &lt;b&gt;Barang Masuk&lt;/b&gt;&lt;br/&gt;&lt;i&gt;(No Masuk, Supplier, Qty, Harga)&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="530" y="230" width="200" height="60" as="geometry" />
+</mxCell>
+<mxCell id="n_stok_tambah_pusat" value="&lt;b&gt;StokService::tambah()&lt;/b&gt;&lt;br/&gt;&amp;bull; Update &lt;i&gt;stok_lokasi&lt;/i&gt; Pusat&lt;br/&gt;&amp;bull; Insert &lt;i&gt;mutasi_stok&lt;/i&gt; (masuk)&lt;br/&gt;&amp;bull; Transaksi &lt;i&gt;DB::transaction&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F4F5;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="910" y="230" width="210" height="70" as="geometry" />
+</mxCell>
+<mxCell id="n_db_stok1" value="&lt;b&gt;Database&lt;/b&gt;&lt;br/&gt;stok_lokasi&lt;br/&gt;mutasi_stok" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="965" y="330" width="100" height="55" as="geometry" />
+</mxCell>
+<mxCell id="n_cabang_cek_stok" value="Cek Stok Cabang /&lt;br/&gt;Saran Distribusi Sistem" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="130" y="390" width="200" height="50" as="geometry" />
+</mxCell>
+<mxCell id="n_cabang_minta" value="Buat &lt;b&gt;Permintaan Bahan&lt;/b&gt;&lt;br/&gt;&lt;i&gt;(nomor_permintaan, qty)&lt;/i&gt;&lt;br/&gt;Status: &lt;b&gt;menunggu&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="130" y="470" width="200" height="60" as="geometry" />
+</mxCell>
+<mxCell id="n_pusat_review_minta" value="Verifikasi Permintaan &amp;&lt;br/&gt;Cek Stok Gudang Pusat" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="530" y="470" width="200" height="60" as="geometry" />
+</mxCell>
+<mxCell id="n_pusat_tolak" value="Tolak Permintaan&lt;br/&gt;&lt;i&gt;(Isi alasan penolakan)&lt;/i&gt;&lt;br/&gt;Status: &lt;b&gt;ditolak&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#E4E4E7;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="440" y="560" width="160" height="50" as="geometry" />
+</mxCell>
+<mxCell id="n_pusat_buat_sj" value="Setujui &amp; Terbitkan&lt;br/&gt;&lt;b&gt;Pengiriman (Surat Jalan)&lt;/b&gt;&lt;br/&gt;&lt;i&gt;(nomor_surat_jalan, kurir/sopir)&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="610" y="560" width="195" height="60" as="geometry" />
+</mxCell>
+<mxCell id="n_stok_kurang_pusat" value="&lt;b&gt;StokService::kurangi()&lt;/b&gt;&lt;br/&gt;&amp;bull; Potong &lt;i&gt;stok_lokasi&lt;/i&gt; Pusat&lt;br/&gt;&amp;bull; Insert &lt;i&gt;mutasi_stok&lt;/i&gt; (keluar)&lt;br/&gt;Status: &lt;b&gt;dikirim&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F4F5;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="910" y="560" width="210" height="65" as="geometry" />
+</mxCell>
+<mxCell id="n_kirim_ekspedisi" value="Ekspedisi / Driver&lt;br/&gt;Kirim Bahan ke Cabang" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="610" y="650" width="195" height="45" as="geometry" />
+</mxCell>
+<mxCell id="n_cabang_terima" value="Cabang Terima Fisik &amp;&lt;br/&gt;Input &lt;b&gt;Jumlah Diterima&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="130" y="650" width="200" height="55" as="geometry" />
+</mxCell>
+<mxCell id="n_cek_selisih" value="Pemeriksaan Fisik:&lt;br/&gt;&lt;b&gt;Ada Selisih Kirim vs Terima?&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="130" y="735" width="200" height="65" as="geometry" />
+</mxCell>
+<mxCell id="n_selisih_sesuai" value="Status: &lt;b&gt;diterima&lt;/b&gt;&lt;br/&gt;Jumlah kirim = diterima" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="50" y="830" width="160" height="55" as="geometry" />
+</mxCell>
+<mxCell id="n_selisih_ada" value="Status: &lt;b&gt;selisih&lt;/b&gt;&lt;br/&gt;Input catatan selisih &amp;&lt;br/&gt;Trigger notifikasi audit" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#E4E4E7;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="250" y="830" width="165" height="55" as="geometry" />
+</mxCell>
+<mxCell id="n_stok_tambah_cabang" value="&lt;b&gt;StokService::tambah()&lt;/b&gt;&lt;br/&gt;&amp;bull; Tambah &lt;i&gt;stok_lokasi&lt;/i&gt; Cabang&lt;br/&gt;&amp;bull; Insert &lt;i&gt;mutasi_stok&lt;/i&gt; (masuk)&lt;br/&gt;&amp;bull; Update status minta: &lt;b&gt;selesai&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F4F5;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="910" y="825" width="210" height="70" as="geometry" />
+</mxCell>
+<mxCell id="n_cabang_spk" value="Input &lt;b&gt;Pemakaian Bahan&lt;/b&gt;&lt;br/&gt;&lt;i&gt;(nomor_spk, bahan, qty)&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="130" y="950" width="200" height="55" as="geometry" />
+</mxCell>
+<mxCell id="n_stok_pakai" value="&lt;b&gt;StokService::kurangi()&lt;/b&gt;&lt;br/&gt;&amp;bull; Potong &lt;i&gt;stok_lokasi&lt;/i&gt; Cabang&lt;br/&gt;&amp;bull; Catat &lt;i&gt;mutasi_stok&lt;/i&gt; (pemakaian)&lt;br/&gt;&amp;bull; Akumulasi &lt;i&gt;pemakaian_bulanan&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F4F5;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="910" y="945" width="210" height="70" as="geometry" />
+</mxCell>
+<mxCell id="n_mesin_rusak" value="Kendala Mesin di Cabang:&lt;br/&gt;Input &lt;b&gt;Laporan Kerusakan&lt;/b&gt;&lt;br/&gt;&lt;i&gt;(Foto HP, Kronologi, Suku Cadang)&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#E4E4E7;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="130" y="1070" width="200" height="65" as="geometry" />
+</mxCell>
+<mxCell id="n_pusat_tindak_mesin" value="Pusat Verifikasi &amp; Kirim Teknisi&lt;br/&gt;Status: &lt;b&gt;diperiksa &amp;rarr; diperbaiki&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="530" y="1070" width="200" height="65" as="geometry" />
+</mxCell>
+<mxCell id="n_selesai_mesin" value="Perbaikan Fisik Selesai &amp;&lt;br/&gt;Input &lt;b&gt;Riwayat Perbaikan&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="530" y="1165" width="200" height="55" as="geometry" />
+</mxCell>
+<mxCell id="n_stok_sukucadang" value="&lt;b&gt;Penutupan Laporan Mesin&lt;/b&gt;&lt;br/&gt;&amp;bull; Potong stok &lt;i&gt;Suku Cadang&lt;/i&gt;&lt;br/&gt;&amp;bull; Status mesin: &lt;b&gt;aktif&lt;/b&gt;&lt;br/&gt;&amp;bull; Status lapor: &lt;b&gt;selesai&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F4F5;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="910" y="1160" width="210" height="70" as="geometry" />
+</mxCell>
+<mxCell id="n_scheduler" value="&lt;b&gt;Artisan Command &amp;amp; Scheduler&lt;/b&gt;&lt;br/&gt;&amp;bull; Single Exponential Smoothing (&amp;alpha;=0.20)&lt;br/&gt;&amp;bull; Hitung Safety Stock &amp;amp; ROP&lt;br/&gt;&amp;bull; Generate Saran Beli &amp;amp; Distribusi" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F4F5;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="910" y="1275" width="210" height="80" as="geometry" />
+</mxCell>
+<mxCell id="n_owner_dash" value="&lt;b&gt;Dashboard Eksekutif Owner&lt;/b&gt;&lt;br/&gt;&amp;bull; Monitoring Stok Kritis &amp;amp; Selisih&lt;br/&gt;&amp;bull; Review Saran Pembelian &amp;amp; ROP&lt;br/&gt;&amp;bull; Ekspor Laporan PDF / Excel" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#18181B;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#FFFFFF;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1300" y="815" width="210" height="85" as="geometry" />
+</mxCell>
+<mxCell id="n_end_all" value="Selesai: Siklus Inventaris Terintegrasi" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#FFFFFF;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1300" y="1370" width="210" height="50" as="geometry" />
+</mxCell>
+<mxCell id="e1_1" value="Surat Jalan Supplier" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="n_start_bm" target="n_pusat_terima_bm" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_2" value="Submit Form" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="n_pusat_terima_bm" target="n_stok_tambah_pusat" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_3" value="Persist" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="n_stok_tambah_pusat" target="n_db_stok1" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_4" value="Stok Rendah" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="n_cabang_cek_stok" target="n_cabang_minta" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_5" value="Ajukan Permintaan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="n_cabang_minta" target="n_pusat_review_minta" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_6" value="Ditolak" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="n_pusat_review_minta" target="n_pusat_tolak" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_7" value="Disetujui" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="n_pusat_review_minta" target="n_pusat_buat_sj" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_8" value="Auto Potong" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="n_pusat_buat_sj" target="n_stok_kurang_pusat" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_9" value="Kirim Fisik" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="n_pusat_buat_sj" target="n_kirim_ekspedisi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_10" value="Tiba di Cabang" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="n_kirim_ekspedisi" target="n_cabang_terima" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_11" value="Hitung Selisih" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="n_cabang_terima" target="n_cek_selisih" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_12" value="Sesuai (0)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="n_cek_selisih" target="n_selisih_sesuai" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_13" value="Ada Selisih" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="n_cek_selisih" target="n_selisih_ada" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_14" value="Update Penuh" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="n_selisih_sesuai" target="n_stok_tambah_cabang" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_15" value="Update Riil" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="n_selisih_ada" target="n_stok_tambah_cabang" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_16" value="Notifikasi Selisih" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="n_selisih_ada" target="n_owner_dash" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_17" value="Input SPK" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="n_cabang_spk" target="n_stok_pakai" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_18" value="Kirim Laporan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="n_mesin_rusak" target="n_pusat_tindak_mesin" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_19" value="Tindakan Teknisi" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="n_pusat_tindak_mesin" target="n_selesai_mesin" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_20" value="Konfirmasi Selesai" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="n_selesai_mesin" target="n_stok_sukucadang" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_21" value="Data Historis" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="n_stok_pakai" target="n_scheduler" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_22" value="Feed Saran Stok" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="n_scheduler" target="n_owner_dash" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e1_23" value="Review Selesai" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="n_owner_dash" target="n_end_all" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag_distribusi" name="2. Alur Distribusi & Rekonsiliasi">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1650" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+<mxCell id="header_title" value="&lt;b style=&quot;font-size:15px;letter-spacing:0.5px;&quot;&gt;DETAIL ALUR DISTRIBUSI &amp; REKONSILIASI STOK (PUSAT &amp;ndash; CABANG)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:11px;color:#E5E7EB;&quot;&gt;Mekanisme Surat Jalan, Pemotongan Transaksional, dan Rekonsiliasi Selisih Fisik Barang&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;fontFamily=IBM Plex Sans, Arial, sans-serif;fontColor=#FFFFFF;align=center;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="40" y="20" width="1420" height="50" as="geometry" />
+</mxCell>
+<mxCell id="d2_start" value="Mulai: Evaluasi Kebutuhan Stok Cabang" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#FFFFFF;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="610" y="100" width="240" height="50" as="geometry" />
+</mxCell>
+<mxCell id="d2_cek_trigger" value="Kondisi Permintaan:&lt;br/&gt;&lt;b&gt;Stok &amp;le; ROP ATAU Pesanan Khusus?&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="620" y="180" width="220" height="70" as="geometry" />
+</mxCell>
+<mxCell id="d2_cabang_form" value="Admin Cabang Input &lt;b&gt;Form Permintaan&lt;/b&gt;&lt;br/&gt;&amp;bull; Pilih Bahan Baku Percetakan&lt;br/&gt;&amp;bull; Input Jumlah Diminta (&lt;i&gt;jumlah_minta&lt;/i&gt;)&lt;br/&gt;&amp;bull; Catatan Kebutuhan SPK" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="610" y="290" width="240" height="70" as="geometry" />
+</mxCell>
+<mxCell id="d2_db_minta" value="Insert tabel &lt;b&gt;permintaan&lt;/b&gt;&lt;br/&gt;&amp;amp; &lt;b&gt;detail_permintaan&lt;/b&gt;&lt;br/&gt;Status: &lt;b&gt;menunggu&lt;/b&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="630" y="395" width="200" height="55" as="geometry" />
+</mxCell>
+<mxCell id="d2_pusat_verif" value="Admin Gudang Pusat:&lt;br/&gt;&lt;b&gt;Verifikasi Permintaan&lt;/b&gt;&lt;br/&gt;Cek Ketersediaan Stok di Pusat" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="620" y="485" width="220" height="65" as="geometry" />
+</mxCell>
+<mxCell id="d2_tolak" value="Admin Pusat Input &lt;b&gt;Alasan Penolakan&lt;/b&gt;&lt;br/&gt;&amp;bull; Update status: &lt;b&gt;ditolak&lt;/b&gt;&lt;br/&gt;&amp;bull; Notifikasi alasan ke Cabang" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#E4E4E7;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="270" y="485" width="230" height="65" as="geometry" />
+</mxCell>
+<mxCell id="d2_end_tolak" value="Selesai: Permintaan Ditolak" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#FFFFFF;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="90" y="492" width="140" height="50" as="geometry" />
+</mxCell>
+<mxCell id="d2_setujui" value="Setujui Permintaan:&lt;br/&gt;&amp;bull; Input &lt;i&gt;jumlah_disetujui&lt;/i&gt;&lt;br/&gt;&amp;bull; Update status: &lt;b&gt;disetujui&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="610" y="585" width="240" height="60" as="geometry" />
+</mxCell>
+<mxCell id="d2_buat_sj" value="Pusat Buat &lt;b&gt;Pengiriman (Surat Jalan)&lt;/b&gt;&lt;br/&gt;&amp;bull; No Surat Jalan (&lt;i&gt;SJ-YYYY-XXXX&lt;/i&gt;)&lt;br/&gt;&amp;bull; Ekspedisi / Nama Sopir&lt;br/&gt;&amp;bull; Jumlah dikirim per bahan" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="610" y="675" width="240" height="70" as="geometry" />
+</mxCell>
+<mxCell id="d2_service_potong" value="&lt;b&gt;StokService::kurangi(Pusat)&lt;/b&gt;&lt;br/&gt;&lt;i&gt;DB::beginTransaction()&lt;/i&gt;&lt;br/&gt;&amp;bull; &lt;i&gt;stok_lokasi&lt;/i&gt; Pusat berkurang&lt;br/&gt;&amp;bull; Insert &lt;i&gt;mutasi_stok&lt;/i&gt; (keluar)&lt;br/&gt;&amp;bull; Status kirim: &lt;b&gt;dikirim&lt;/b&gt;&lt;br/&gt;&lt;i&gt;DB::commit()&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F4F5;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="610" y="775" width="240" height="85" as="geometry" />
+</mxCell>
+<mxCell id="d2_ekspedisi" value="Barang Bergerak dalam Perjalanan&lt;br/&gt;&lt;i&gt;(Status Pengiriman: dikirim)&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="630" y="890" width="200" height="50" as="geometry" />
+</mxCell>
+<mxCell id="d2_tiba_cabang" value="Barang Fisik Tiba di Cabang:&lt;br/&gt;Admin Cabang Lakukan Unboxing &amp;amp;&lt;br/&gt;Pemeriksaan Fisik Lapangan" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="610" y="970" width="240" height="65" as="geometry" />
+</mxCell>
+<mxCell id="d2_input_terima" value="Cabang Buka Modul Penerimaan (HP/PC):&lt;br/&gt;Input &lt;b&gt;jumlah_terima&lt;/b&gt; &amp;amp; Tanggal Terima" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="610" y="1065" width="240" height="55" as="geometry" />
+</mxCell>
+<mxCell id="d2_eval_selisih" value="Evaluasi Kesesuaian Fisik:&lt;br/&gt;&lt;b&gt;jumlah_terima == jumlah_kirim?&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="610" y="1150" width="240" height="70" as="geometry" />
+</mxCell>
+<mxCell id="d2_ada_selisih" value="&lt;b&gt;TERDAPAT SELISIH&lt;/b&gt;&lt;br/&gt;&amp;bull; Hitung &lt;i&gt;selisih = kirim - terima&lt;/i&gt;&lt;br/&gt;&amp;bull; Status pengiriman: &lt;b&gt;selisih&lt;/b&gt;&lt;br/&gt;&amp;bull; Wajib input &lt;i&gt;catatan_selisih&lt;/i&gt;&lt;br/&gt;&amp;bull; Alert laporan selisih ke Pusat &amp;amp; Owner" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#E4E4E7;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="260" y="1250" width="260" height="85" as="geometry" />
+</mxCell>
+<mxCell id="d2_sesuai" value="&lt;b&gt;SESUAI (SEMPURNA)&lt;/b&gt;&lt;br/&gt;&amp;bull; &lt;i&gt;selisih = 0&lt;/i&gt;&lt;br/&gt;&amp;bull; Status pengiriman: &lt;b&gt;diterima&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="940" y="1250" width="230" height="60" as="geometry" />
+</mxCell>
+<mxCell id="d2_service_tambah" value="&lt;b&gt;StokService::tambah(Cabang)&lt;/b&gt;&lt;br/&gt;&lt;i&gt;DB::beginTransaction()&lt;/i&gt;&lt;br/&gt;&amp;bull; Tambah &lt;i&gt;stok_lokasi&lt;/i&gt; Cabang sebesar &lt;b&gt;jumlah_terima&lt;/b&gt;&lt;br/&gt;&amp;bull; Insert &lt;i&gt;mutasi_stok&lt;/i&gt; (masuk)&lt;br/&gt;&amp;bull; Update status permintaan &amp;rarr; &lt;b&gt;selesai&lt;/b&gt;&lt;br/&gt;&lt;i&gt;DB::commit()&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F4F5;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="605" y="1375" width="250" height="90" as="geometry" />
+</mxCell>
+<mxCell id="d2_laporan_rekonsiliasi" value="Pencatatan Rekonsiliasi Otomatis:&lt;br/&gt;&amp;bull; Laporan Pengiriman &amp;amp; Penerimaan Terbit&lt;br/&gt;&amp;bull; Riwayat Mutasi Tercatat Rinci di Kedua Lokasi" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="605" y="1495" width="250" height="55" as="geometry" />
+</mxCell>
+<mxCell id="d2_end" value="Selesai: Distribusi Selesai &amp;amp; Terkonsiliasi" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#FFFFFF;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="630" y="1580" width="200" height="45" as="geometry" />
+</mxCell>
+<mxCell id="e2_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_start" target="d2_cek_trigger" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_2" value="Kebutuhan Valid" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_cek_trigger" target="d2_cabang_form" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_3" value="Submit Permintaan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_cabang_form" target="d2_db_minta" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_4" value="Notifikasi ke Pusat" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_db_minta" target="d2_pusat_verif" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_5" value="TIDAK (Ditolak)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="d2_pusat_verif" target="d2_tolak" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="d2_tolak" target="d2_end_tolak" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_7" value="YA (Disetujui)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_pusat_verif" target="d2_setujui" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_8" value="Lanjut Surat Jalan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_setujui" target="d2_buat_sj" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_9" value="Trigger Potong Stok" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_buat_sj" target="d2_service_potong" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_10" value="Bahan Berangkat" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_service_potong" target="d2_ekspedisi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_11" value="Pengiriman Fisik" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_ekspedisi" target="d2_tiba_cabang" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_12" value="Cek Fisik Lapangan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_tiba_cabang" target="d2_input_terima" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_13" value="Hitung Selisih" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_input_terima" target="d2_eval_selisih" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_14" value="TIDAK (Ada Selisih)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_eval_selisih" target="d2_ada_selisih" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_15" value="YA (Sesuai)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_eval_selisih" target="d2_sesuai" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_16" value="Terima Sesuai Fisik" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="d2_ada_selisih" target="d2_service_tambah" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_17" value="Terima Penuh" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="d2_sesuai" target="d2_service_tambah" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_18" value="Stok Terupdate" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_service_tambah" target="d2_laporan_rekonsiliasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e2_19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d2_laporan_rekonsiliasi" target="d2_end" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag_mesin" name="3. Alur Kerusakan Mesin & Suku Cadang">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1550" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+<mxCell id="header_title" value="&lt;b style=&quot;font-size:15px;letter-spacing:0.5px;&quot;&gt;DETAIL ALUR KERUSAKAN MESIN &amp; PENGGANTIAN SUKU CADANG&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:11px;color:#E5E7EB;&quot;&gt;Integrasi Modul Pemeliharaan Mesin dengan Stok Suku Cadang (Kategori: Suku Cadang)&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;fontFamily=IBM Plex Sans, Arial, sans-serif;fontColor=#FFFFFF;align=center;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="40" y="20" width="1420" height="50" as="geometry" />
+</mxCell>
+<mxCell id="d3_start" value="Mulai: Kendala / Kerusakan Mesin di Cabang" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#FFFFFF;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="590" y="100" width="260" height="50" as="geometry" />
+</mxCell>
+<mxCell id="d3_akses_form" value="Admin Cabang Akses Modul Mesin &amp;rarr; &lt;b&gt;Lapor Kerusakan&lt;/b&gt;&lt;br/&gt;&lt;i&gt;(Mobile Friendly / Akses Cepat HP Kamera)&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="590" y="180" width="260" height="60" as="geometry" />
+</mxCell>
+<mxCell id="d3_input_lapor" value="Isi Form Laporan Kerusakan:&lt;br/&gt;&amp;bull; Pilih Mesin Percetakan (&lt;i&gt;id_mesin&lt;/i&gt;)&lt;br/&gt;&amp;bull; Gejala Kerusakan&lt;br/&gt;&amp;bull; Kronologi Kejadian&lt;br/&gt;&amp;bull; Foto Kerusakan (Upload HP/Kamera Langsung)&lt;br/&gt;&amp;bull; Perkiraan Suku Cadang (&lt;i&gt;detail_kerusakan&lt;/i&gt;)" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="590" y="275" width="260" height="95" as="geometry" />
+</mxCell>
+<mxCell id="d3_submit_lapor" value="Submit Laporan ke Sistem:&lt;br/&gt;&amp;bull; Insert &lt;i&gt;laporan_kerusakan&lt;/i&gt; (status: &lt;b&gt;dilaporkan&lt;/b&gt;)&lt;br/&gt;&amp;bull; Update status mesin &amp;rarr; &lt;b&gt;rusak&lt;/b&gt;&lt;br/&gt;&amp;bull; Simpan path foto ke disk &lt;i&gt;public&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F4F5;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="590" y="400" width="260" height="75" as="geometry" />
+</mxCell>
+<mxCell id="d3_notif_pusat" value="Notifikasi Masuk ke Dashboard Admin Pusat&lt;br/&gt;&lt;i&gt;(Daftar Laporan Kerusakan Aktif)&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="600" y="505" width="240" height="50" as="geometry" />
+</mxCell>
+<mxCell id="d3_pusat_review" value="Admin Pusat Review Kronologi &amp;amp; Foto:&lt;br/&gt;Update status laporan &amp;rarr; &lt;b&gt;diperiksa&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="590" y="585" width="260" height="55" as="geometry" />
+</mxCell>
+<mxCell id="d3_cek_suku" value="Diagnosa Teknis:&lt;br/&gt;&lt;b&gt;Butuh Penggantian Suku Cadang?&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="610" y="670" width="220" height="65" as="geometry" />
+</mxCell>
+<mxCell id="d3_siapkan_part" value="Pusat Siapkan Suku Cadang:&lt;br/&gt;&amp;bull; Cek ketersediaan di sistem&lt;br/&gt;&amp;bull; Kirim suku cadang ke cabang" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#E4E4E7;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="280" y="770" width="240" height="60" as="geometry" />
+</mxCell>
+<mxCell id="d3_langsung_servis" value="Pembersihan / Setting / Perbaikan Minor&lt;br/&gt;&lt;i&gt;(Tanpa penggantian komponen)&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="920" y="770" width="240" height="60" as="geometry" />
+</mxCell>
+<mxCell id="d3_tugas_teknisi" value="Pusat Tugaskan Teknisi Lapangan:&lt;br/&gt;Update status laporan &amp;rarr; &lt;b&gt;diperbaiki&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="590" y="865" width="260" height="55" as="geometry" />
+</mxCell>
+<mxCell id="d3_tindakan_fisik" value="Teknisi Melakukan Tindakan Perbaikan Fisik&lt;br/&gt;pada Mesin di Cabang" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="600" y="950" width="240" height="50" as="geometry" />
+</mxCell>
+<mxCell id="d3_selesai_form" value="Input Form &lt;b&gt;Penyelesaian Perbaikan&lt;/b&gt;:&lt;br/&gt;&amp;bull; Tanggal Selesai&lt;br/&gt;&amp;bull; Tindakan Perbaikan yang Dilakukan&lt;br/&gt;&amp;bull; Nama Teknisi&lt;br/&gt;&amp;bull; Konfirmasi Suku Cadang Aktual Terpakai" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="580" y="1030" width="280" height="80" as="geometry" />
+</mxCell>
+<mxCell id="d3_eksekusi_tutup" value="&lt;b&gt;Eksekusi Penutupan Sistem&lt;/b&gt;&lt;br/&gt;&lt;i&gt;DB::beginTransaction()&lt;/i&gt;&lt;br/&gt;&amp;bull; Insert ke &lt;i&gt;riwayat_perbaikan&lt;/i&gt;&lt;br/&gt;&amp;bull; &lt;b&gt;StokService::kurangi()&lt;/b&gt; suku cadang terpakai&lt;br/&gt;&amp;bull; Catat &lt;i&gt;mutasi_stok&lt;/i&gt; (kategori Suku cadang)&lt;br/&gt;&amp;bull; Update status laporan &amp;rarr; &lt;b&gt;selesai&lt;/b&gt;&lt;br/&gt;&amp;bull; Update status mesin &amp;rarr; &lt;b&gt;aktif&lt;/b&gt;&lt;br/&gt;&lt;i&gt;DB::commit()&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F4F5;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="580" y="1145" width="280" height="110" as="geometry" />
+</mxCell>
+<mxCell id="d3_mesin_aktif" value="Mesin Kembali Berstatus &lt;b&gt;Aktif&lt;/b&gt; &amp;amp;&lt;br/&gt;Siap Beroperasi Normal untuk Produksi" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="590" y="1290" width="260" height="55" as="geometry" />
+</mxCell>
+<mxCell id="d3_end" value="Selesai: Siklus Perbaikan Tercatat Lengkap" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#FFFFFF;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="620" y="1375" width="200" height="45" as="geometry" />
+</mxCell>
+<mxCell id="e3_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d3_start" target="d3_akses_form" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d3_akses_form" target="d3_input_lapor" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_3" value="Submit Laporan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d3_input_lapor" target="d3_submit_lapor" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_4" value="Sistem Alert" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d3_submit_lapor" target="d3_notif_pusat" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d3_notif_pusat" target="d3_pusat_review" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_6" value="Diagnosa" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d3_pusat_review" target="d3_cek_suku" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_7" value="YA (Butuh Part)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d3_cek_suku" target="d3_siapkan_part" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_8" value="TIDAK" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d3_cek_suku" target="d3_langsung_servis" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_9" value="Part Tersedia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="d3_siapkan_part" target="d3_tugas_teknisi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_10" value="Siap Tindakan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="d3_langsung_servis" target="d3_tugas_teknisi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_11" value="Teknisi Berangkat" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d3_tugas_teknisi" target="d3_tindakan_fisik" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_12" value="Mesin Diuji Coba" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d3_tindakan_fisik" target="d3_selesai_form" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_13" value="Simpan &amp; Potong Part" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d3_selesai_form" target="d3_eksekusi_tutup" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d3_eksekusi_tutup" target="d3_mesin_aktif" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e3_15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d3_mesin_aktif" target="d3_end" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag_prediksi" name="4. Alur Prediksi Stok & ROP">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1650" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+<mxCell id="header_title" value="&lt;b style=&quot;font-size:15px;letter-spacing:0.5px;&quot;&gt;DETAIL ALUR PREDIKSI KEBUTUHAN STOK &amp; REORDER POINT (ROP)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:11px;color:#E5E7EB;&quot;&gt;Metode Single Exponential Smoothing (&amp;alpha;=0.20), Safety Stock (Z=1.65), dan Rekomendasi Pengadaan&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;fontFamily=IBM Plex Sans, Arial, sans-serif;fontColor=#FFFFFF;align=center;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="40" y="20" width="1420" height="50" as="geometry" />
+</mxCell>
+<mxCell id="d4_start" value="Mulai: Trigger Rutin Bulanan (Laravel Scheduler)&lt;br/&gt;&lt;i&gt;php artisan stok:hitung-prediksi&lt;/i&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#FFFFFF;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="570" y="100" width="280" height="55" as="geometry" />
+</mxCell>
+<mxCell id="d4_query_historis" value="Query Data Historis Pemakaian:&lt;br/&gt;Tabel &lt;b&gt;pemakaian_bulanan&lt;/b&gt; per Bahan &amp;amp; Lokasi" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="580" y="185" width="260" height="55" as="geometry" />
+</mxCell>
+<mxCell id="d4_loop" value="Looping Setiap Kombinasi Bahan Baku &amp;amp; Lokasi&lt;br/&gt;&lt;i&gt;(Gudang Pusat + 5 Cabang)&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="580" y="270" width="260" height="50" as="geometry" />
+</mxCell>
+<mxCell id="d4_ambil_param" value="Ambil Parameter Bahan dari &lt;i&gt;parameter_bahan&lt;/i&gt;:&lt;br/&gt;&amp;bull; &lt;i&gt;lead_time_hari&lt;/i&gt; (default: 3 hari)&lt;br/&gt;&amp;bull; &lt;i&gt;safety_factor&lt;/i&gt; (Z = 1.65 untuk 95% service level)&lt;br/&gt;&amp;bull; Smoothing Constant (&amp;alpha; = 0.20)" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="570" y="350" width="280" height="75" as="geometry" />
+</mxCell>
+<mxCell id="d4_hitung_ses" value="&lt;b&gt;Hitung Prediksi Pemakaian (SES)&lt;/b&gt;:&lt;br/&gt;&lt;b&gt;F&lt;sub&gt;t+1&lt;/sub&gt; = &amp;alpha; &amp;middot; A&lt;sub&gt;t&lt;/sub&gt; + (1 - &amp;alpha;) &amp;middot; F&lt;sub&gt;t&lt;/sub&gt;&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Simpan hasil ke tabel &#39;prediksi&#39;&lt;/i&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F4F5;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="570" y="455" width="280" height="75" as="geometry" />
+</mxCell>
+<mxCell id="d4_hitung_rop" value="&lt;b&gt;Hitung Safety Stock &amp;amp; Reorder Point (ROP)&lt;/b&gt;:&lt;br/&gt;&amp;bull; Rata-rata harian: &lt;i&gt;d = F&lt;sub&gt;t+1&lt;/sub&gt; / 30&lt;/i&gt;&lt;br/&gt;&amp;bull; &lt;i&gt;Safety Stock (SS) = Z &amp;times; &amp;radic;L &amp;times; &amp;sigma;&lt;/i&gt;&lt;br/&gt;&amp;bull; &lt;b&gt;ROP = (d &amp;times; Lead Time) + SS&lt;/b&gt;&lt;br/&gt;Update &lt;i&gt;parameter_bahan&lt;/i&gt; (&lt;i&gt;rop, safety_stock&lt;/i&gt;)" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F4F5;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="560" y="560" width="300" height="90" as="geometry" />
+</mxCell>
+<mxCell id="d4_cek_stok" value="Bandingkan Stok Aktual Saat Ini:&lt;br/&gt;&lt;b&gt;stok_lokasi.jumlah &amp;le; ROP?&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="600" y="680" width="220" height="70" as="geometry" />
+</mxCell>
+<mxCell id="d4_status_aman" value="Status Stok: &lt;b&gt;Aman&lt;/b&gt;&lt;br/&gt;&amp;bull; Tidak perlu pengadaan segera&lt;br/&gt;&amp;bull; Indikator status normal di tabel" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="950" y="685" width="230" height="60" as="geometry" />
+</mxCell>
+<mxCell id="d4_status_kritis" value="Status Stok: &lt;b&gt;Menipis / Kritis&lt;/b&gt;&lt;br/&gt;Stok berada di bawah ambang batas aman" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#E4E4E7;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="600" y="790" width="220" height="55" as="geometry" />
+</mxCell>
+<mxCell id="d4_cek_tipe_lokasi" value="Cek Tipe Lokasi:&lt;br/&gt;&lt;b&gt;Gudang Pusat ATAU Cabang?&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="600" y="880" width="220" height="65" as="geometry" />
+</mxCell>
+<mxCell id="d4_saran_beli" value="Generate &lt;b&gt;Saran Pembelian&lt;/b&gt; (Pusat):&lt;br/&gt;&amp;bull; Target: Pesan ke Supplier&lt;br/&gt;&amp;bull; Insert &lt;i&gt;saran_pembelian&lt;/i&gt;&lt;br/&gt;&amp;bull; Estimasi biaya = Qty &amp;times; Harga Beli" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="310" y="985" width="250" height="75" as="geometry" />
+</mxCell>
+<mxCell id="d4_saran_dist" value="Generate &lt;b&gt;Saran Distribusi&lt;/b&gt; (Cabang):&lt;br/&gt;&amp;bull; Target: Kirim dari Gudang Pusat&lt;br/&gt;&amp;bull; Insert &lt;i&gt;saran_distribusi&lt;/i&gt;&lt;br/&gt;&amp;bull; Qty saran = ROP &amp;times; 2 - Stok Saat Ini" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="860" y="985" width="260" height="75" as="geometry" />
+</mxCell>
+<mxCell id="d4_dashboard" value="Tampilkan di &lt;b&gt;Dashboard Eksekutif &amp;amp; Operasional&lt;/b&gt;:&lt;br/&gt;&amp;bull; Kartu Ringkasan Kritis&lt;br/&gt;&amp;bull; Daftar Bahan Perlu Dipesan / Dikirim&lt;br/&gt;&amp;bull; Grafik Trend Prediksi Pemakaian" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#18181B;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#FFFFFF;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="570" y="1100" width="280" height="80" as="geometry" />
+</mxCell>
+<mxCell id="d4_keputusan" value="Pusat / Owner Mengambil Tindakan:&lt;br/&gt;&lt;b&gt;Eksekusi Rekomendasi?&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontStyle=1;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="600" y="1220" width="220" height="65" as="geometry" />
+</mxCell>
+<mxCell id="d4_eksekusi_po" value="Terbitkan PO ke Supplier /&lt;br/&gt;Proses Pengiriman ke Cabang" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="600" y="1325" width="220" height="55" as="geometry" />
+</mxCell>
+<mxCell id="d4_abaikan" value="Tandai Status Saran:&lt;br/&gt;&lt;b&gt;diabaikan&lt;/b&gt; / ditunda" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="340" y="1225" width="180" height="55" as="geometry" />
+</mxCell>
+<mxCell id="d4_end" value="Selesai: Siklus Prediksi &amp;amp; ROP Berhasil" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#FFFFFF;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="610" y="1420" width="200" height="45" as="geometry" />
+</mxCell>
+<mxCell id="e4_1" value="Scheduler Trigger" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d4_start" target="d4_query_historis" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d4_query_historis" target="d4_loop" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_3" value="Iterasi Bahan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d4_loop" target="d4_ambil_param" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_4" value="Input Param" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d4_ambil_param" target="d4_hitung_ses" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_5" value="Hasil Prediksi" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d4_hitung_ses" target="d4_hitung_rop" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_6" value="Bandingkan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d4_hitung_rop" target="d4_cek_stok" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_7" value="TIDAK (Stok &gt; ROP)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="d4_cek_stok" target="d4_status_aman" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_8" value="YA (Stok &le; ROP)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d4_cek_stok" target="d4_status_kritis" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_9" value="Evaluasi Lokasi" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d4_status_kritis" target="d4_cek_tipe_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_10" value="Gudang Pusat" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d4_cek_tipe_lokasi" target="d4_saran_beli" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_11" value="Cabang (5 Lokasi)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d4_cek_tipe_lokasi" target="d4_saran_dist" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_12" value="Feed Rekomendasi" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="d4_saran_beli" target="d4_dashboard" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_13" value="Feed Rekomendasi" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="d4_saran_dist" target="d4_dashboard" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_14" value="Update Status" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="d4_status_aman" target="d4_dashboard" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_15" value="Aksi Manajerial" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d4_dashboard" target="d4_keputusan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_16" value="YA (Setuju)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d4_keputusan" target="d4_eksekusi_po" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_17" value="TIDAK (Abaikan)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="d4_keputusan" target="d4_abaikan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d4_eksekusi_po" target="d4_end" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="e4_19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="d4_abaikan" target="d4_end" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag_chen_erd" name="ERD Notasi Chen CetakStok">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3000" pageHeight="2400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+<mxCell id="header_title" value="&lt;b style=&quot;font-size:16px;letter-spacing:0.5px;&quot;&gt;ENTITY RELATIONSHIP DIAGRAM (NOTASI PETER CHEN) - SISTEM CETAKSTOK&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:12px;color:#4B5563;&quot;&gt;Arsitektur Relasi Basis Data Inventaris Gudang Pusat &amp; 5 Cabang Percetakan&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontColor=#000000;align=center;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="30" width="2880" height="55" as="geometry" />
+</mxCell>
+<mxCell id="legend_box" value="&lt;b&gt;LEGENDA NOTASI PETER CHEN (STANDAR AKADEMIS):&lt;/b&gt;&lt;br/&gt;&amp;bull; &lt;b&gt;Kotak Persegi Panjang:&lt;/b&gt; Entitas Kuat (Strong Entity)&lt;br/&gt;&amp;bull; &lt;b&gt;Kotak Persegi Ganda:&lt;/b&gt; Entitas Lemah (Weak Entity)&lt;br/&gt;&amp;bull; &lt;b&gt;Belah Ketupat (Diamond):&lt;/b&gt; Relasi &amp;amp; Kardinalitas (1, N, M)&lt;br/&gt;&amp;bull; &lt;b&gt;Belah Ketupat Ganda:&lt;/b&gt; Identifying Relationship (Relasi Entitas Lemah)&lt;br/&gt;&amp;bull; &lt;b&gt;Oval Garis Bawah (&lt;u&gt;Key&lt;/u&gt;):&lt;/b&gt; Primary Key (Kunci Utama)&lt;br/&gt;&amp;bull; &lt;b&gt;Oval Reguler:&lt;/b&gt; Atribut Entitas / Atribut Relasi" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;align=left;spacingLeft=12;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="105" width="450" height="110" as="geometry" />
+</mxCell>
+<mxCell id="ent_bahan" value="&lt;b style=&quot;font-size:12px;&quot;&gt;BAHAN&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="850" y="750" width="160" height="60" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_bahan_c1_0" value="&lt;u&gt;&lt;b&gt;id_bahan&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="800" y="510" width="115" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_bahan_c1_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_bahan_c1_0" target="ent_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_bahan_c1_1" value="kode_bahan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="800" y="554" width="115" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_bahan_c1_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_bahan_c1_1" target="ent_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_bahan_c1_2" value="nama_bahan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="800" y="598" width="115" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_bahan_c1_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_bahan_c1_2" target="ent_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_bahan_c2_0" value="satuan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="945" y="510" width="115" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_bahan_c2_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_bahan_c2_0" target="ent_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_bahan_c2_1" value="spesifikasi" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="945" y="554" width="115" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_bahan_c2_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_bahan_c2_1" target="ent_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_bahan_c2_2" value="harga_estimasi" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="945" y="598" width="115" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_bahan_c2_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_bahan_c2_2" target="ent_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_lokasi" value="&lt;b style=&quot;font-size:12px;&quot;&gt;LOKASI&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1650" y="750" width="160" height="60" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_lokasi_c1_0" value="&lt;u&gt;&lt;b&gt;id_lokasi&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1600" y="470" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_lokasi_c1_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_lokasi_c1_0" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_lokasi_c1_1" value="kode_lokasi" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1600" y="514" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_lokasi_c1_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_lokasi_c1_1" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_lokasi_c1_2" value="nama_lokasi" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1600" y="558" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_lokasi_c1_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_lokasi_c1_2" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_lokasi_c1_3" value="tipe" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1600" y="602" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_lokasi_c1_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_lokasi_c1_3" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_lokasi_c2_0" value="alamat" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1750" y="470" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_lokasi_c2_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_lokasi_c2_0" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_lokasi_c2_1" value="telepon" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1750" y="514" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_lokasi_c2_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_lokasi_c2_1" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_lokasi_c2_2" value="penanggung_jawab" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1750" y="558" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_lokasi_c2_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_lokasi_c2_2" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_lokasi_c2_3" value="is_aktif" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1750" y="602" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_lokasi_c2_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_ent_lokasi_c2_3" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_stok_lokasi" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Tersimpan_Di&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1250" y="752" width="130" height="56" as="geometry" />
+</mxCell>
+<mxCell id="l_stok_b" value="M" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_bahan" target="rel_stok_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_stok_l" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="rel_stok_lokasi" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_stok_jumlah" value="jumlah" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1260" y="670" width="110" height="34" as="geometry" />
+</mxCell>
+<mxCell id="attr_stok_min" value="stok_minimum" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1260" y="845" width="110" height="34" as="geometry" />
+</mxCell>
+<mxCell id="l_attr_stok1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="rel_stok_lokasi" target="attr_stok_jumlah" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_attr_stok2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="rel_stok_lokasi" target="attr_stok_min" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_kategori" value="&lt;b style=&quot;font-size:12px;&quot;&gt;KATEGORI&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="400" y="750" width="140" height="60" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_kategori_0" value="&lt;u&gt;&lt;b&gt;id_kategori&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="220" y="680" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_kategori_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_kategori_0" target="ent_kategori" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_kategori_1" value="kode_kategori" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="220" y="724" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_kategori_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_kategori_1" target="ent_kategori" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_kategori_2" value="nama_kategori" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="220" y="768" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_kategori_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_kategori_2" target="ent_kategori" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_kategori_3" value="deskripsi" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="220" y="812" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_kategori_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_kategori_3" target="ent_kategori" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_tergolong" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Tergolong&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="630" y="752" width="120" height="56" as="geometry" />
+</mxCell>
+<mxCell id="l_kat_rel" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_kategori" target="rel_tergolong" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_rel_bah" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="rel_tergolong" target="ent_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_user" value="&lt;b style=&quot;font-size:12px;&quot;&gt;USER&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2200" y="750" width="140" height="60" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_user_0" value="&lt;u&gt;&lt;b&gt;id_user&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2420" y="680" width="115" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_user_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_user_0" target="ent_user" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_user_1" value="name" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2420" y="724" width="115" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_user_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_user_1" target="ent_user" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_user_2" value="email" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2420" y="768" width="115" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_user_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_user_2" target="ent_user" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_user_3" value="role" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2420" y="812" width="115" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_user_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_user_3" target="ent_user" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_tugas_di" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Bertugas_Di&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1950" y="752" width="120" height="56" as="geometry" />
+</mxCell>
+<mxCell id="l_usr_lok" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_user" target="rel_tugas_di" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_lok_usr" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="rel_tugas_di" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_supplier" value="&lt;b style=&quot;font-size:12px;&quot;&gt;SUPPLIER&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="220" y="280" width="140" height="55" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_supplier_0" value="&lt;u&gt;&lt;b&gt;id_supplier&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="170" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_supplier_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_supplier_0" target="ent_supplier" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_supplier_1" value="kode_supplier" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="212" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_supplier_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_supplier_1" target="ent_supplier" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_supplier_2" value="nama_supplier" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="254" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_supplier_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_supplier_2" target="ent_supplier" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_supplier_3" value="kontak_person" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="296" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_supplier_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_supplier_3" target="ent_supplier" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_supplier_4" value="telepon" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="338" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_supplier_4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_supplier_4" target="ent_supplier" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_supplier_5" value="email" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="380" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_supplier_5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_supplier_5" target="ent_supplier" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_memasok" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Memasok&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="410" y="280" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_sup_bm" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_supplier" target="rel_memasok" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_barang_masuk" value="&lt;b style=&quot;font-size:12px;&quot;&gt;BARANG_MASUK&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="580" y="280" width="150" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_rel_bm" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="rel_memasok" target="ent_barang_masuk" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_bm_0" value="&lt;u&gt;&lt;b&gt;id_masuk&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="510" y="175" width="105" height="34" as="geometry" />
+</mxCell>
+<mxCell id="l_attr_bm_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_bm_0" target="ent_barang_masuk" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_bm_1" value="nomor_masuk" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="625" y="175" width="105" height="34" as="geometry" />
+</mxCell>
+<mxCell id="l_attr_bm_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_bm_1" target="ent_barang_masuk" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_bm_2" value="tanggal_masuk" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="740" y="175" width="105" height="34" as="geometry" />
+</mxCell>
+<mxCell id="l_attr_bm_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_bm_2" target="ent_barang_masuk" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_bm_3" value="nomor_po" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="855" y="175" width="105" height="34" as="geometry" />
+</mxCell>
+<mxCell id="l_attr_bm_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="attr_bm_3" target="ent_barang_masuk" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_masuk_di" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Diterima_Di&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1250" y="280" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_bm_lok" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_barang_masuk" target="rel_masuk_di" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_lok_bm" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="rel_masuk_di" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_id_bm" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Terdiri_Dari&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;shape=rhombus;double=1;" vertex="1" parent="1">
+  <mxGeometry x="595" y="360" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_bm_idm" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="ent_barang_masuk" target="rel_id_bm" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_det_masuk" value="&lt;b style=&quot;font-size:12px;&quot;&gt;DETAIL_MASUK&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;shape=ext;double=1;" vertex="1" parent="1">
+  <mxGeometry x="580" y="440" width="150" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_idm_det" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="rel_id_bm" target="ent_det_masuk" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_det_masuk_0" value="jumlah" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="410" y="395" width="110" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_det_masuk_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_det_masuk_0" target="ent_det_masuk" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_det_masuk_1" value="harga_satuan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="410" y="435" width="110" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_det_masuk_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_det_masuk_1" target="ent_det_masuk" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_det_masuk_2" value="subtotal" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="410" y="475" width="110" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_det_masuk_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_det_masuk_2" target="ent_det_masuk" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_item_bm" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Merujuk_Bahan&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="595" y="540" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_dm_rb" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="ent_det_masuk" target="rel_item_bm" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_rb_bah" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="rel_item_bm" target="ent_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_permintaan" value="&lt;b style=&quot;font-size:12px;&quot;&gt;PERMINTAAN&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="250" y="1100" width="150" height="55" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_permintaan_0" value="&lt;u&gt;&lt;b&gt;id_permintaan&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="990" width="130" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_permintaan_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_permintaan_0" target="ent_permintaan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_permintaan_1" value="nomor_permintaan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="1032" width="130" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_permintaan_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_permintaan_1" target="ent_permintaan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_permintaan_2" value="tanggal_minta" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="1074" width="130" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_permintaan_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_permintaan_2" target="ent_permintaan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_permintaan_3" value="status" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="1116" width="130" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_permintaan_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_permintaan_3" target="ent_permintaan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_permintaan_4" value="catatan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="1158" width="130" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_permintaan_4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_permintaan_4" target="ent_permintaan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_permintaan_5" value="alasan_tolak" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="1200" width="130" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_permintaan_5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_permintaan_5" target="ent_permintaan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_minta_lok" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Diajukan_Oleh&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="450" y="1020" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_pm_lok" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_permintaan" target="rel_minta_lok" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_lok_pm" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="rel_minta_lok" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_id_pm" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Memuat_Item&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;shape=rhombus;double=1;" vertex="1" parent="1">
+  <mxGeometry x="410" y="1100" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="ent_det_minta" value="&lt;b style=&quot;font-size:12px;&quot;&gt;DETAIL_PERMINTAAN&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;shape=ext;double=1;" vertex="1" parent="1">
+  <mxGeometry x="540" y="1100" width="170" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_pm_idm" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_permintaan" target="rel_id_pm" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_idm_det" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="rel_id_pm" target="ent_det_minta" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_dp_minta" value="jumlah_minta" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="520" y="1180" width="105" height="32" as="geometry" />
+</mxCell>
+<mxCell id="attr_dp_setuju" value="jumlah_disetujui" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="635" y="1180" width="110" height="32" as="geometry" />
+</mxCell>
+<mxCell id="l_dp_a1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="ent_det_minta" target="attr_dp_minta" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_dp_a2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="ent_det_minta" target="attr_dp_setuju" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_dp_bahan" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Item_Bahan&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="750" y="1100" width="110" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_dp_relb" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_det_minta" target="rel_dp_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_relb_bah" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="rel_dp_bahan" target="ent_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_penuhi_minta" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Memenuhi&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="265" y="1240" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_pm_kirim" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="ent_permintaan" target="rel_penuhi_minta" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_pengiriman" value="&lt;b style=&quot;font-size:12px;&quot;&gt;PENGIRIMAN&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="250" y="1380" width="150" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_kirim_pm" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="rel_penuhi_minta" target="ent_pengiriman" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_pengiriman_0" value="&lt;u&gt;&lt;b&gt;id_pengiriman&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="1270" width="130" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_pengiriman_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_pengiriman_0" target="ent_pengiriman" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_pengiriman_1" value="no_surat_jalan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="1312" width="130" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_pengiriman_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_pengiriman_1" target="ent_pengiriman" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_pengiriman_2" value="tanggal_kirim" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="1354" width="130" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_pengiriman_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_pengiriman_2" target="ent_pengiriman" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_pengiriman_3" value="tanggal_terima" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="1396" width="130" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_pengiriman_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_pengiriman_3" target="ent_pengiriman" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_pengiriman_4" value="status" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="1438" width="130" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_pengiriman_4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_pengiriman_4" target="ent_pengiriman" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_pengiriman_5" value="ekspedisi_sopir" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="60" y="1480" width="130" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_pengiriman_5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_pengiriman_5" target="ent_pengiriman" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_kirim_tujuan" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Dikirim_Ke&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="450" y="1480" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_krm_rel" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_pengiriman" target="rel_kirim_tujuan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_rel_lok_tuj" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="rel_kirim_tujuan" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_id_krm" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Memuat_Bahan&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;shape=rhombus;double=1;" vertex="1" parent="1">
+  <mxGeometry x="410" y="1380" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="ent_det_kirim" value="&lt;b style=&quot;font-size:12px;&quot;&gt;DETAIL_PENGIRIMAN&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;shape=ext;double=1;" vertex="1" parent="1">
+  <mxGeometry x="540" y="1380" width="170" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_krm_idk" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_pengiriman" target="rel_id_krm" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_idk_det" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="rel_id_krm" target="ent_det_kirim" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_dk_krm" value="jumlah_kirim" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="500" y="1460" width="105" height="32" as="geometry" />
+</mxCell>
+<mxCell id="attr_dk_trm" value="jumlah_terima" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="615" y="1460" width="105" height="32" as="geometry" />
+</mxCell>
+<mxCell id="attr_dk_sls" value="selisih" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="730" y="1460" width="95" height="32" as="geometry" />
+</mxCell>
+<mxCell id="l_dk_a1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="ent_det_kirim" target="attr_dk_krm" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_dk_a2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="ent_det_kirim" target="attr_dk_trm" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_dk_a3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="ent_det_kirim" target="attr_dk_sls" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_det_pakai" value="&lt;b style=&quot;font-size:12px;&quot;&gt;DETAIL_PEMAKAIAN&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;shape=ext;double=1;" vertex="1" parent="1">
+  <mxGeometry x="980" y="1100" width="160" height="55" as="geometry" />
+</mxCell>
+<mxCell id="attr_dpk_qty" value="jumlah" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="850" y="1110" width="95" height="32" as="geometry" />
+</mxCell>
+<mxCell id="l_dpk_a1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_det_pakai" target="attr_dpk_qty" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_dpk_bah" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Bahan_Terpakai&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1000" y="950" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_dpk_rb" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="ent_det_pakai" target="rel_dpk_bah" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_rb_bah" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="rel_dpk_bah" target="ent_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_id_pk" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Memakai_Item&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;shape=rhombus;double=1;" vertex="1" parent="1">
+  <mxGeometry x="1190" y="1100" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_id_dpk" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="rel_id_pk" target="ent_det_pakai" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_pemakaian" value="&lt;b style=&quot;font-size:12px;&quot;&gt;PEMAKAIAN&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1360" y="1100" width="150" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_pk_id" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_pemakaian" target="rel_id_pk" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_pemakaian_0" value="&lt;u&gt;&lt;b&gt;id_pemakaian&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1375" y="1200" width="120" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_pemakaian_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_pemakaian_0" target="ent_pemakaian" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_pemakaian_1" value="nomor_pemakaian" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1375" y="1240" width="120" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_pemakaian_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_pemakaian_1" target="ent_pemakaian" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_pemakaian_2" value="tanggal_pakai" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1375" y="1280" width="120" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_pemakaian_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_pemakaian_2" target="ent_pemakaian" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_pemakaian_3" value="nomor_spk" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1375" y="1320" width="120" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_pemakaian_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_pemakaian_3" target="ent_pemakaian" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_pemakaian_4" value="keperluan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1375" y="1360" width="120" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_pemakaian_4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_pemakaian_4" target="ent_pemakaian" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_pakai_lok" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Terjadi_Di&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1550" y="950" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_pakai_rel" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="ent_pemakaian" target="rel_pakai_lok" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_rel_lokp" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="rel_pakai_lok" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_mesin" value="&lt;b style=&quot;font-size:12px;&quot;&gt;MESIN&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1850" y="1100" width="150" height="55" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_mesin_0" value="&lt;u&gt;&lt;b&gt;id_mesin&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1010" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_mesin_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_mesin_0" target="ent_mesin" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_mesin_1" value="kode_mesin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1052" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_mesin_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_mesin_1" target="ent_mesin" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_mesin_2" value="nama_mesin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1094" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_mesin_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_mesin_2" target="ent_mesin" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_mesin_3" value="tipe_mesin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1136" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_mesin_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_mesin_3" target="ent_mesin" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_mesin_4" value="status" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1178" width="120" height="34" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_mesin_4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_mesin_4" target="ent_mesin" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_mesin_lok" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Ditempatkan_Di&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1720" y="950" width="130" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_msn_rel" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="ent_mesin" target="rel_mesin_lok" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_rel_lok_m" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="rel_mesin_lok" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_mengalami" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Mengalami&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1865" y="1240" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_msn_lp" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="ent_mesin" target="rel_mengalami" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_laporan" value="&lt;b style=&quot;font-size:12px;&quot;&gt;LAPORAN_KERUSAKAN&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1830" y="1380" width="190" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_lp_msn" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="rel_mengalami" target="ent_laporan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_laporan_0" value="&lt;u&gt;&lt;b&gt;id_laporan&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1270" width="125" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_laporan_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_laporan_0" target="ent_laporan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_laporan_1" value="nomor_laporan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1310" width="125" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_laporan_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_laporan_1" target="ent_laporan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_laporan_2" value="tanggal_lapor" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1350" width="125" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_laporan_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_laporan_2" target="ent_laporan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_laporan_3" value="gejala" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1390" width="125" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_laporan_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_laporan_3" target="ent_laporan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_laporan_4" value="kronologi" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1430" width="125" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_laporan_4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_laporan_4" target="ent_laporan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_laporan_5" value="status" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1470" width="125" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_laporan_5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_laporan_5" target="ent_laporan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_laporan_6" value="foto_kerusakan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1510" width="125" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_laporan_6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_laporan_6" target="ent_laporan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_id_lk" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Memerlukan_Part&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;shape=rhombus;double=1;" vertex="1" parent="1">
+  <mxGeometry x="1690" y="1380" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="ent_det_rusak" value="&lt;b style=&quot;font-size:12px;&quot;&gt;DETAIL_KERUSAKAN&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;shape=ext;double=1;" vertex="1" parent="1">
+  <mxGeometry x="1540" y="1380" width="170" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_lp_idk" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_laporan" target="rel_id_lk" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_idk_det" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="rel_id_lk" target="ent_det_rusak" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_dr_qty" value="jumlah" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1570" y="1465" width="110" height="32" as="geometry" />
+</mxCell>
+<mxCell id="l_dr_a1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="ent_det_rusak" target="attr_dr_qty" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_part_bahan" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Suku_Cadang&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1150" y="1550" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_dr_relb" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="ent_det_rusak" target="rel_part_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_relb_bhn" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="rel_part_bahan" target="ent_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_menyelesaikan" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Menyelesaikan&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1865" y="1520" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_lp_rw" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="ent_laporan" target="rel_menyelesaikan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_riwayat" value="&lt;b style=&quot;font-size:12px;&quot;&gt;RIWAYAT_PERBAIKAN&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1835" y="1660" width="180" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_rw_lp" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="rel_menyelesaikan" target="ent_riwayat" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_riwayat_0" value="&lt;u&gt;&lt;b&gt;id_riwayat&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1600" width="125" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_riwayat_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_riwayat_0" target="ent_riwayat" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_riwayat_1" value="tanggal_selesai" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1640" width="125" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_riwayat_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_riwayat_1" target="ent_riwayat" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_riwayat_2" value="tindakan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1680" width="125" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_riwayat_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_riwayat_2" target="ent_riwayat" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_riwayat_3" value="teknisi" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1720" width="125" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_riwayat_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_riwayat_3" target="ent_riwayat" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_riwayat_4" value="catatan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="2080" y="1760" width="125" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_riwayat_4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_riwayat_4" target="ent_riwayat" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_parameter" value="&lt;b style=&quot;font-size:12px;&quot;&gt;PARAMETER_BAHAN&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="800" y="1900" width="170" height="55" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_parameter_0" value="&lt;u&gt;&lt;b&gt;id_param&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="570" y="1800" width="135" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_parameter_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_parameter_0" target="ent_parameter" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_parameter_1" value="lead_time_hari" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="570" y="1840" width="135" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_parameter_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_parameter_1" target="ent_parameter" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_parameter_2" value="safety_factor" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="570" y="1880" width="135" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_parameter_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_parameter_2" target="ent_parameter" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_parameter_3" value="alpha" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="570" y="1920" width="135" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_parameter_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_parameter_3" target="ent_parameter" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_parameter_4" value="rop" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="570" y="1960" width="135" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_parameter_4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_parameter_4" target="ent_parameter" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_parameter_5" value="safety_stock" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="570" y="2000" width="135" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_parameter_5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_parameter_5" target="ent_parameter" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_param_bhn" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Konfigurasi_Stok&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="825" y="1750" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_pm_bhn" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="ent_parameter" target="rel_param_bhn" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_bhn_pm" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="rel_param_bhn" target="ent_bahan" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="ent_prediksi" value="&lt;b style=&quot;font-size:12px;&quot;&gt;PREDIKSI&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=12;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1650" y="1900" width="150" height="55" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_prediksi_0" value="&lt;u&gt;&lt;b&gt;id_prediksi&lt;/b&gt;&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1870" y="1820" width="120" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_prediksi_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_prediksi_0" target="ent_prediksi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_prediksi_1" value="periode_tahun" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1870" y="1860" width="120" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_prediksi_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_prediksi_1" target="ent_prediksi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_prediksi_2" value="periode_bulan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1870" y="1900" width="120" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_prediksi_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_prediksi_2" target="ent_prediksi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_prediksi_3" value="hasil_prediksi" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1870" y="1940" width="120" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_prediksi_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_prediksi_3" target="ent_prediksi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="attr_ent_prediksi_4" value="metode" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=10;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1870" y="1980" width="120" height="32" as="geometry" />
+</mxCell>
+<mxCell id="br_attr_ent_prediksi_4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="attr_ent_prediksi_4" target="ent_prediksi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="rel_hitung_pred" value="&lt;i style=&quot;font-size:11px;&quot;&gt;Diproyeksikan&lt;/i&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontColor=#000000;shadow=0;" vertex="1" parent="1">
+  <mxGeometry x="1665" y="1750" width="120" height="55" as="geometry" />
+</mxCell>
+<mxCell id="l_pred_rel" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="ent_prediksi" target="rel_hitung_pred" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="l_rel_pred_l" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=IBM Plex Sans, Arial, sans-serif;fontSize=11;fontStyle=1;fontColor=#000000;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="rel_hitung_pred" target="ent_lokasi" parent="1">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

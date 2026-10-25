@@ -1,0 +1,269 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --frame: #E6E2D7;
+    --sheet: #FBFAF6;
+    --surface: #FFFFFF;
+    --border: #E2DED2;
+    --text: #1C1A15;
+    --muted: #6B665A;
+    --accent: #0B6B73;
+    --accent-hover: #08565D;
+    --ok: #3E7B22;
+    --ok-bg: #EAF2E4;
+    --warn: #9A5B00;
+    --warn-bg: #FBF0DC;
+    --danger: #B42318;
+    --danger-bg: #FCEAE8;
+  }
+
+  body {
+    background-color: var(--frame);
+    color: var(--text);
+    font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, .font-display {
+    font-family: 'Bricolage Grotesque', 'Instrument Sans', sans-serif;
+    letter-spacing: -0.015em;
+  }
+
+  .font-mono, .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom Sleek Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #D4CFC0 transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4CFC0;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B3A27A;
+}
+
+/* Utilitas sembunyikan scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Panels: satu langkah tone di atas lembar, tepi tipis */
+.panel {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+/* Kolom ringkasan: satu wadah, dibagi garis tipis */
+.stat-strip {
+  display: grid;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.stat-strip > * {
+  padding: 16px 20px;
+  border-left: 1px solid var(--border);
+  transition: background-color 150ms ease;
+}
+.stat-strip > *:first-child { border-left: none; }
+.stat-strip > a:hover { background-color: #F7F4EC; }
+@media (max-width: 767px) {
+  .stat-strip > * { border-left: none; border-top: 1px solid var(--border); }
+  .stat-strip > *:first-child { border-top: none; }
+}
+
+.stat-label { font-size: 12.5px; color: var(--muted); }
+.stat-value {
+  font-family: 'Bricolage Grotesque', 'Instrument Sans', sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  margin-top: 6px;
+}
+.stat-note { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+
+/* Takaran stok: lintasan dengan penanda batas minimum di tengah */
+.level {
+  position: relative;
+  height: 8px;
+  border-radius: 4px;
+  background-color: #ECE8DC;
+}
+.level > span { position: absolute; inset: 0 auto 0 0; border-radius: 4px; }
+.level::after {
+  content: '';
+  position: absolute;
+  top: -3px; bottom: -3px; left: 50%;
+  width: 2px;
+  background-color: var(--text);
+  opacity: .55;
+}
+
+.table-dense {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.table-dense th {
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.table-dense td {
+  padding: 10px 16px;
+  height: 48px;
+  border-bottom: 1px solid #EFEBE0;
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.table-dense tr:last-child td {
+  border-bottom: none;
+}
+
+.table-dense tbody tr {
+  transition: background-color 150ms ease;
+}
+.table-dense tbody tr:hover {
+  background-color: #F7F4EC;
+}
+
+/* Status: teks + warna, titik kecil sebagai penanda */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.badge-ok { background-color: var(--ok-bg); color: var(--ok); }
+.badge-warn { background-color: var(--warn-bg); color: var(--warn); }
+.badge-danger { background-color: var(--danger-bg); color: var(--danger); }
+.badge-accent { background-color: #E3F0F0; color: var(--accent); }
+.badge-muted { background-color: #EFEBE0; color: var(--muted); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 8px;
+  transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+  cursor: pointer;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background-color: var(--text);
+  color: #FFFFFF;
+  border: 1px solid var(--text);
+}
+.btn-primary:hover {
+  background-color: #38342A;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid #D4CFC0;
+}
+.btn-secondary:hover {
+  background-color: #F1EEE6;
+}
+
+.btn-danger {
+  background-color: transparent;
+  color: var(--danger);
+  border: 1px solid #E9B9B3;
+}
+.btn-danger:hover {
+  background-color: var(--danger-bg);
+}
+.btn-danger:focus-visible {
+  outline: 2px solid var(--danger);
+  outline-offset: 2px;
+}
+
+/* Inputs */
+.input-text, .select-text {
+  width: 100%;
+  border: 1px solid #D4CFC0;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  padding: 7px 11px;
+  font-size: 14px;
+  color: var(--text);
+  transition: border-color 150ms ease;
+}
+.input-text:focus, .select-text:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* Target sentuh untuk layar kasar */
+@media (pointer: coarse) {
+  .btn, .input-text, .select-text {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
